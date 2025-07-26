@@ -1,49 +1,48 @@
-﻿import { fastify } from 'fastify';
-import { config } from '@/config/environment';
-import { setupMiddleware } from '@/middleware';
-import { setupRoutes } from '@/routes';
-import { logger } from '@/utils/logger';
+﻿import fastify from "fastify";
+import { config } from "./config/environment";
+import { setupRoutes } from "./routes";
+import { db } from "./services/database/collections";
+import { logger } from "./utils/logger";
+import { initializeSocketServer } from "./services/websocket/socket.server";
 
 const server = fastify({
-  logger: false, // Use Winston instead
-  trustProxy: true,
+  logger: false, // Use our custom logger
 });
 
-async function start() {
+// Create HTTP server for WebSocket integration
+const httpServer = server.server;
+
+async function startServer() {
   try {
-    // Setup middleware
-    await setupMiddleware(server);
-    
-    // Setup routes
+    // Setup API routes
     await setupRoutes(server);
-    
-    // Health check
-    server.get('/health', async () => {
-      return { status: 'ok', timestamp: new Date().toISOString() };
+
+    // Initialize database
+    await db.initializeDatabase();
+
+    // Initialize WebSocket server
+    const socketServer = initializeSocketServer(httpServer);
+
+    // Start server
+    await server.listen({
+      port: config.port,
+      host: config.host,
     });
-    
-    const port = config.port;
-    const host = config.host;
-    
-    await server.listen({ port, host });
-    logger.info(`Server running on http://${host}:${port}`);
+
+    logger.info(`Server running on http://${config.host}:${config.port}`);
+    logger.info("WebSocket server ready for real-time connections");
+
+    // Graceful shutdown
+    process.on("SIGTERM", async () => {
+      logger.info("SIGTERM received, shutting down gracefully");
+      await socketServer.shutdown();
+      await server.close();
+      process.exit(0);
+    });
   } catch (error) {
-    logger.error('Failed to start server:', error);
+    logger.error("Failed to start server:", error);
     process.exit(1);
   }
 }
 
-// Graceful shutdown
-process.on('SIGTERM', async () => {
-  logger.info('SIGTERM received, shutting down gracefully');
-  await server.close();
-  process.exit(0);
-});
-
-process.on('SIGINT', async () => {
-  logger.info('SIGINT received, shutting down gracefully');
-  await server.close();
-  process.exit(0);
-});
-
-start();
+startServer();

@@ -5,6 +5,7 @@ import reportsRoutes from "./reports";
 import alertsRoutes from "./alerts";
 import analyticsRoutes from "./analytics";
 import intelligenceRoutes from "./intelligence";
+import realtimeRoutes from "./realtime"; // Add this
 
 export async function setupRoutes(server: FastifyInstance) {
   await server.register(healthRoutes, { prefix: "/api/health" });
@@ -13,4 +14,5 @@ export async function setupRoutes(server: FastifyInstance) {
   await server.register(alertsRoutes, { prefix: "/api/alerts" });
   await server.register(analyticsRoutes, { prefix: "/api/analytics" });
   await server.register(intelligenceRoutes, { prefix: "/api/intelligence" });
+  await server.register(realtimeRoutes, { prefix: "/api/realtime" }); // Add this
 }
