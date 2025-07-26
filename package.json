@@ -1,0 +1,25 @@
+﻿{
+    "name":  "civic-mind",
+    "version":  "1.0.0",
+    "description":  "Civic engagement platform",
+    "private":  true,
+    "packageManager":  "pnpm@10.13.1",
+    "scripts":  {
+                    "lint":  "turbo run lint",
+                    "format":  "prettier --write .",
+                    "build":  "turbo run build",
+                    "test:ci":  "turbo run test:ci",
+                    "type-check":  "turbo run type-check",
+                    "dev":  "turbo run dev --parallel",
+                    "test":  "turbo run test",
+                    "clean":  "turbo run clean \u0026\u0026 rm -rf node_modules"
+                },
+    "devDependencies":  {
+                            "turbo":  "^1.13.4",
+                            "eslint":  "^8.57.1",
+                            "prettier":  "^3.0.0",
+                            "typescript":  "^5.3.3",
+                            "@typescript-eslint/eslint-plugin":  "^6.21.0",
+                            "@typescript-eslint/parser":  "^6.21.0"
+                        }
+}

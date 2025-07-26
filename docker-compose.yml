@@ -1,0 +1,36 @@
+﻿version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:3001
+    volumes:
+      - ./apps/web:/app
+      - /app/node_modules
+
+  backend:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+    volumes:
+      - ./apps/api:/app
+      - /app/node_modules
+
+  firestore-emulator:
+    image: gcr.io/google.com/cloudsdktool/cloud-sdk:latest
+    ports:
+      - "8080:8080"
+    command: >
+      sh -c "gcloud components install cloud-firestore-emulator --quiet &&
+             gcloud beta emulators firestore start --host-port=0.0.0.0:8080"
