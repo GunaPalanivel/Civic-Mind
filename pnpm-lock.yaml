@@ -42,7 +42,7 @@ importers:
         specifier: ^8.3.1
         version: 8.3.1
       '@google-cloud/firestore':
-        specifier: ^7.3.0
+        specifier: ^7.11.3
         version: 7.11.3
       '@google-cloud/monitoring':
         specifier: ^4.0.0
@@ -60,7 +60,7 @@ importers:
         specifier: ^4.25.2
         version: 4.29.1
       firebase-admin:
-        specifier: ^12.0.0
+        specifier: ^12.7.0
         version: 12.7.0
       ioredis:
         specifier: ^5.3.2
@@ -88,7 +88,7 @@ importers:
         specifier: ^20.10.6
         version: 20.19.9
       '@types/uuid':
-        specifier: ^9.0.7
+        specifier: ^9.0.8
         version: 9.0.8
       '@typescript-eslint/eslint-plugin':
         specifier: ^6.21.0
@@ -166,7 +166,7 @@ importers:
   packages/utils:
     dependencies:
       zod:
-        specifier: ^3.25.76
+        specifier: ^3.25.7
         version: 3.25.76
     devDependencies:
       typescript:
