@@ -12,7 +12,7 @@
                     "type-check":  "turbo run type-check",
                     "dev":  "turbo run dev --parallel",
                     "test":  "turbo run test",
-                    "clean":  "turbo run clean \u0026\u0026 rm -rf node_modules"
+                    "clean":  "turbo run clean \u0026\u0026 Remove-Item -Recurse -Force node_modules -ErrorAction SilentlyContinue"
                 },
     "devDependencies":  {
                             "turbo":  "^1.13.4",

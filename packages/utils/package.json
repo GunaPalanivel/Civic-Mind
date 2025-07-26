@@ -1,16 +1,16 @@
 {
-    "version": "1.0.0",
-    "name": "@civic-mind/utils",
-    "types": "dist/index.d.ts",
-    "scripts": {
-        "dev": "tsc --watch",
-        "build": "tsc"
-    },
-    "devDependencies": {
-        "typescript": "^5.3.3"
-    },
-    "dependencies": {
-        "zod": "^3.25.76"
-    },
-    "main": "dist/index.js"
+  "name": "@civic-mind/utils",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "zod": "^3.25.7"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
 }

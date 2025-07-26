@@ -1,21 +1,12 @@
-﻿{
+{
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "commonjs",
-    "lib": ["ES2022"],
     "outDir": "./dist",
-    "rootDir": "./src",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"],
+      "@civic-mind/utils": ["../../packages/utils/src"],
+      "@civic-mind/shared-types": ["../../packages/shared-types/src"]
     }
   },
   "include": ["src/**/*"],
