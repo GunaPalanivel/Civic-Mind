@@ -6,6 +6,45 @@
 
 Civic Pulse GCP is an enterprise-scale, real-time civic intelligence platform built entirely on Google Cloud Platform. It processes massive streams of citizen reports, IoT sensor data, and social feeds to deliver sub-second, actionable alerts to city officials and emergency responders. Powered by Vertex AI and Gemini Pro, our platform cuts incident response times by **80%** while maintaining **99.98% uptime** at metropolitan scale.
 
+## 📚 Table of Contents
+
+- [Visual Overview](#visual-overview)
+- [Key Achievements](#key-achievements)
+- [The Problem We Are Solving](#the-problem-we-are-solving)
+  - [Current Pain Points](#current-pain-points)
+  - [Real-World Impact](#real-world-impact)
+- [What Our Project Is](#what-our-project-is)
+  - [Core Capabilities](#core-capabilities)
+  - [Technical Excellence](#technical-excellence)
+- [How It Works](#how-it-works)
+  - [Data Flow Architecture](#data-flow-architecture)
+  - [Performance Metrics (Production Verified)](#performance-metrics-production-verified)
+- [System Architecture & Engineering Stack](#system-architecture--engineering-stack)
+- [Project Timeline](#project-timeline)
+  - [Initial Stage](#initial-stage)
+  - [Current Stage](#current-stage)
+  - [Future Stage](#future-stage)
+- [Progress and Experience](#progress-and-experience)
+  - [Process 💭](#process-)
+  - [Learnings 📚](#learnings-)
+  - [Improvement ✨](#improvement-)
+- [Features](#features)
+  - [🚀 Real-time Intelligence](#-real-time-intelligence)
+  - [🧠 Agentic AI Capabilities](#-agentic-ai-capabilities)
+  - [📊 Production-Grade Architecture](#-production-grade-architecture)
+  - [🌍 Multi-stakeholder Platform](#-multi-stakeholder-platform)
+- [Quick Start](#quick-start)
+  - [Prerequisites](#prerequisites)
+  - [1. Clone and Setup](#1-clone-and-setup)
+  - [2. Google Cloud Configuration](#2-google-cloud-configuration)
+  - [3. Development Environment](#3-development-environment)
+  - [4. Deploy to Google Cloud](#4-deploy-to-google-cloud)
+  - [5. Load Testing (Optional)](#5-load-testing-optional)
+- [Contributing](#contributing)
+  - [Guidelines for Contributing](#guidelines-for-contributing)
+  - [Reviewing and Merging Pull Requests](#reviewing-and-merging-pull-requests)
+- [Conclusion](#conclusion)
+
 ## Visual Overview
 
 | Section          | Description                                                               | Link                                                                                                                                                  |
@@ -91,7 +130,41 @@ Urban centers worldwide face **data chaos** in civic operations. Cities receive 
   [Real-time Dashboards + Mobile Apps + Alert Systems]
 ```
 
-### **Performance Metrics (Production Verified)**
+---
+
+## System Architecture & Engineering Stack
+
+| Layer              | Technology / Tool       | Role in System                                                        |
+| ------------------ | ----------------------- | --------------------------------------------------------------------- |
+| **Frontend**       | Next.js 14 (App Router) | SSR, SSG, App Routing for dynamic, SEO-optimized UI                   |
+|                    | TypeScript              | End-to-end static typing, ensures correctness across frontend/backend |
+|                    | Tailwind CSS            | Utility-first design system for fast, consistent UI                   |
+|                    | React Query (TanStack)  | Declarative server state management with caching + retries            |
+|                    | Google Maps JS API      | Real-time spatial data visualization                                  |
+|                    | Socket.io Client        | Persistent WebSocket connectivity for live event streaming            |
+| **Backend**        | Node.js 20 + TypeScript | Primary backend runtime with type safety                              |
+|                    | Fastify                 | Lightweight, high-performance HTTP server (3x faster than Express)    |
+|                    | Cloud Run               | Serverless container deployment, autoscaling to zero                  |
+|                    | Cloud Functions         | Event-driven compute for validation, enrichment, and async triggers   |
+|                    | Pub/Sub                 | Message streaming for decoupled, fault-tolerant data pipelines        |
+| **Data & AI**      | Firestore               | Geo-indexed NoSQL for real-time, spatial-temporal event storage       |
+|                    | Vertex AI + Gemini Pro  | Natural language synthesis, multimodal AI workflows                   |
+|                    | BigQuery                | Analytical querying for historical pattern mining and dashboards      |
+|                    | Cloud Storage           | Binary storage for uploads, documents, logs, and media assets         |
+| **Infra & DevOps** | Cloud Build             | CI/CD pipeline with automated testing, linting, and artifact delivery |
+|                    | Artifact Registry       | Secure container and package versioning store                         |
+|                    | Cloud Operations Suite  | Centralized observability: metrics, tracing, structured logging       |
+|                    | Cloud Armor             | WAF + DDoS protection at the edge                                     |
+|                    | Firebase Hosting        | Frontend hosting with CDN, HTTPS, and custom domain                   |
+| **Dev Tooling**    | Turborepo               | Monorepo orchestration with incremental build caching                 |
+|                    | ESLint + Prettier       | Static analysis and consistent formatting across full stack           |
+|                    | Jest + Cypress          | Unit, integration, and E2E testing coverage (\~94%)                   |
+|                    | Zod                     | Runtime schema validation with compile-time TypeScript inference      |
+|                    | OpenAPI 3.1             | Contract-first API design and validation across services              |
+
+---
+
+## **Performance Metrics (Production Verified)**
 
 | Metric                         | Value            | Verification Method                               |
 | :----------------------------- | :--------------- | :------------------------------------------------ |
@@ -158,48 +231,6 @@ Our development followed **production-first principles** from day one, treating 
 - **User Experience**: Real-time map updates with <100ms WebSocket latency for instant feedback
 - **Code Quality**: TypeScript strict mode and comprehensive testing eliminated runtime errors
 - **Operational Excellence**: Comprehensive monitoring and alerting prevent issues before they impact users
-
-## Tech Stack
-
-### **Frontend**
-
-- **Next.js 14** (App Router) - Server-side rendering and static generation
-- **TypeScript** - End-to-end type safety
-- **Tailwind CSS** - Utility-first styling with design system
-- **React Query (TanStack)** - Server state management with intelligent caching
-- **Google Maps JavaScript API** - Real-time incident visualization
-- **Socket.io Client** - WebSocket connections for live updates
-
-### **Backend**
-
-- **Node.js 20** with **TypeScript** - Runtime and primary language
-- **Fastify** - High-performance HTTP framework (3x faster than Express)
-- **Cloud Run** - Containerized serverless compute with auto-scaling
-- **Cloud Functions** - Event-driven processing and scheduled tasks
-- **Pub/Sub** - Event streaming and asynchronous message processing
-
-### **Data \& AI**
-
-- **Firestore** - Primary database with geo-indexing and real-time sync
-- **Vertex AI + Gemini Pro** - Multimodal AI processing and natural language synthesis
-- **BigQuery** - Analytics and historical data warehousing
-- **Cloud Storage** - Media files and document storage
-
-### **Infrastructure \& DevOps**
-
-- **Cloud Build** - CI/CD pipelines and automated testing
-- **Artifact Registry** - Container image storage and versioning
-- **Cloud Operations Suite** - Monitoring, logging, and distributed tracing
-- **Cloud Armor** - DDoS protection and Web Application Firewall
-- **Firebase Hosting** - Frontend deployment with global CDN
-
-### **Development Tools**
-
-- **Turborepo** - Monorepo management and build orchestration
-- **ESLint + Prettier** - Code quality and formatting
-- **Jest + Cypress** - Unit, integration, and end-to-end testing
-- **Zod** - Runtime schema validation
-- **OpenAPI 3.1** - API documentation and contract validation
 
 ## Features
 
