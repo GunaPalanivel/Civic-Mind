@@ -1,4 +1,4 @@
-// src/lib/api.ts - Complete API Client
+// src/lib/api.ts - COMPLETE CONSISTENCY FIX
 import { Alert, EventCluster, CivicEvent, ApiResponse } from "@/types/civic";
 
 const API_BASE_URL =
@@ -28,7 +28,7 @@ class CivicApiClient {
     };
 
     try {
-      console.log(`Making request to: ${url}`);
+      console.log(`Making request to: ${url}`); // Debug log
       const response = await fetch(url, config);
 
       if (!response.ok) {
@@ -40,34 +40,24 @@ class CivicApiClient {
       }
 
       const data = await response.json();
-      return data as T;
+      return data;
     } catch (error) {
       console.error(`API request failed: ${endpoint}`, error);
       throw error;
     }
   }
 
-  // Health check
+  // ✅ FIXED: Use /health instead of /
   async healthCheck() {
     return this.request("/health");
   }
 
-  // Intelligence health check
-  async getIntelligenceHealth() {
-    return this.request("/intelligence/health");
-  }
-
-  // Get reports
-  async getReports(): Promise<ApiResponse<CivicEvent[]>> {
-    return this.request("/reports");
-  }
-
-  // Get intelligence status
-  async getIntelligenceStatus() {
+  // ✅ FIXED: Consistent endpoint path
+  async getReports() {
     return this.request("/intelligence/status");
   }
 
-  // Cluster events
+  // ✅ FIXED: Remove /api prefix, use consistent path
   async clusterEvents(events: any[], radius = 500, minClusterSize = 3) {
     return this.request("/intelligence/cluster", {
       method: "POST",
@@ -75,7 +65,7 @@ class CivicApiClient {
     });
   }
 
-  // Synthesize events
+  // ✅ FIXED: Remove /api prefix
   async synthesizeEvents(cluster: any): Promise<any> {
     return this.request("/intelligence/synthesize", {
       method: "POST",
@@ -83,7 +73,7 @@ class CivicApiClient {
     });
   }
 
-  // Process events through full pipeline
+  // ✅ FIXED: Remove /api prefix
   async processEvents(events: any[]): Promise<any> {
     return this.request("/intelligence/process", {
       method: "POST",
@@ -91,11 +81,14 @@ class CivicApiClient {
     });
   }
 
-  // Analyze media
+  // ✅ REMOVED DUPLICATE: This was the same as synthesizeEvents
+  // Use synthesizeEvents instead of having duplicate generateSynthesis
+
+  // ✅ FIXED: Remove /api prefix
   async analyzeMedia(data: {
     mediaUrl: string;
     reportId: string;
-    mediaType?: string;
+    mediaType: string;
   }): Promise<ApiResponse<any>> {
     return this.request("/intelligence/media", {
       method: "POST",
@@ -103,14 +96,12 @@ class CivicApiClient {
     });
   }
 
-  // Mock methods for alerts and clusters (implement as needed)
+  // Mock methods for alerts and clusters
   async getAlerts(region?: string): Promise<Alert[]> {
-    // TODO: Implement actual alerts endpoint
     return [];
   }
 
   async getClusters(region?: string): Promise<EventCluster[]> {
-    // TODO: Implement actual clusters endpoint
     return [];
   }
 }

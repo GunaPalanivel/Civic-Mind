@@ -1,37 +1,53 @@
-﻿import { onRequest } from "firebase-functions/v2/https";
+﻿// src/index.ts - Complete Firebase Functions Setup
+import { onRequest } from "firebase-functions/v2/https";
 import { setGlobalOptions } from "firebase-functions/v2";
-import { initializeApp } from "firebase-admin/app";
+import * as admin from "firebase-admin";
 import express from "express";
 import cors from "cors";
 
-// Initialize Firebase Admin
-initializeApp();
+// Load environment variables for local development
+if (process.env.NODE_ENV !== "production") {
+  try {
+    require("dotenv").config();
+  } catch (error) {
+    // Ignore if dotenv is not available
+  }
+}
 
+// Initialize Firebase Admin
+if (!admin.apps.length) {
+  admin.initializeApp();
+}
+
+// Set global options
 setGlobalOptions({
   region: "asia-south1",
   memory: "1GiB",
   timeoutSeconds: 300,
 });
 
-// Create Express app with CORS handled by Express middleware
-const createApp = () => {
+// Create Express app
+const createApp = (): express.Application => {
   const app = express();
 
-  // Handle CORS at Express level (more flexible)
+  // CORS configuration
   app.use(
     cors({
-      origin: true, // Allow all origins
+      origin: true,
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       allowedHeaders: ["Content-Type", "Authorization"],
       credentials: true,
+      optionsSuccessStatus: 200,
     }),
   );
 
+  // Body parsing middleware
   app.use(express.json({ limit: "1mb" }));
+  app.use(express.urlencoded({ extended: true, limit: "1mb" }));
 
-  // Your existing routes here...
-  app.get("/", (req: express.Request, res: express.Response) => {
-    return res.status(200).json({
+  // Root endpoint
+  app.get("/", (req: express.Request, res: express.Response): void => {
+    res.status(200).json({
       success: true,
       message: "Civic Mind API - Express + Firebase Functions",
       timestamp: new Date().toISOString(),
@@ -40,93 +56,217 @@ const createApp = () => {
     });
   });
 
-  app.get("/health", (req: express.Request, res: express.Response) => {
-    return res.status(200).json({
+  // Health check endpoint
+  app.get("/health", (req: express.Request, res: express.Response): void => {
+    res.status(200).json({
       status: "healthy",
       timestamp: new Date().toISOString(),
       uptime: process.uptime(),
       platform: "Firebase Functions + Express",
+      region: "asia-south1",
     });
   });
 
-  app.get("/test", (req: express.Request, res: express.Response) => {
-    return res.status(200).json({
-      success: true,
-      message: "Test endpoint working",
-      method: req.method,
-      path: req.path,
-      timestamp: new Date().toISOString(),
-    });
-  });
-
-  app.post("/synthesis", (req: express.Request, res: express.Response) => {
-    try {
-      const { cluster } = req.body || {};
-
-      if (!cluster) {
-        return res.status(400).json({
-          success: false,
-          error: "Cluster data required",
-        });
-      }
-
-      const result = {
-        id: `synthesis_${Date.now()}`,
-        summary: `Analyzed ${cluster.events?.length || 0} events`,
-        recommendation: "Monitor situation and follow local guidance",
-        severity: cluster.severity || "MEDIUM",
-        confidence: 85,
-        timestamp: new Date().toISOString(),
-      };
-
-      return res.status(200).json({
+  // Intelligence health check
+  app.get(
+    "/intelligence/health",
+    (req: express.Request, res: express.Response): void => {
+      res.status(200).json({
         success: true,
-        data: result,
-      });
-    } catch (error) {
-      console.error("Synthesis error:", error);
-      return res.status(500).json({
-        success: false,
-        error: "Synthesis failed",
-      });
-    }
-  });
-
-  app.post("/media", (req: express.Request, res: express.Response) => {
-    try {
-      const { mediaUrl, reportId } = req.body || {};
-
-      if (!mediaUrl || !reportId) {
-        return res.status(400).json({
-          success: false,
-          error: "mediaUrl and reportId required",
-        });
-      }
-
-      const result = {
-        id: `media_${Date.now()}`,
-        reportId,
-        mediaUrl,
-        analysis: {
-          detected: ["traffic", "vehicles"],
-          confidence: 0.9,
+        services: {
+          ai: { healthy: true },
+          clustering: { healthy: true },
+          auth: { healthy: true },
         },
         timestamp: new Date().toISOString(),
-      };
+      });
+    },
+  );
 
-      return res.status(200).json({
+  // Intelligence status
+  app.get(
+    "/intelligence/status",
+    (req: express.Request, res: express.Response): void => {
+      res.status(200).json({
         success: true,
-        data: result,
+        message: "Intelligence service is running",
+        version: "1.0.0",
+        timestamp: new Date().toISOString(),
       });
-    } catch (error) {
-      console.error("Media error:", error);
-      return res.status(500).json({
-        success: false,
-        error: "Media analysis failed",
-      });
-    }
-  });
+    },
+  );
 
+  // Clustering endpoint
+  app.post(
+    "/intelligence/cluster",
+    async (req: express.Request, res: express.Response): Promise<void> => {
+      try {
+        const { events } = req.body;
+
+        if (!events || !Array.isArray(events)) {
+          res.status(400).json({
+            success: false,
+            error: "Events array is required",
+            timestamp: new Date().toISOString(),
+          });
+          return;
+        }
+
+        const processingStart = Date.now();
+
+        // TODO: Add actual clustering logic here
+        const result = {
+          clusters: [],
+          outliers: events,
+          metrics: {
+            totalEvents: events.length,
+            clusteredEvents: 0,
+            processingTime: (Date.now() - processingStart) / 1000,
+            clusterCount: 0,
+          },
+        };
+
+        res.status(200).json({
+          success: true,
+          data: result,
+          timestamp: new Date().toISOString(),
+        });
+      } catch (error) {
+        console.error("Clustering error:", error);
+        res.status(500).json({
+          success: false,
+          error: "Clustering failed",
+          timestamp: new Date().toISOString(),
+        });
+      }
+    },
+  );
+
+  // Synthesis endpoint
+  app.post(
+    "/intelligence/synthesize",
+    async (req: express.Request, res: express.Response): Promise<void> => {
+      try {
+        const cluster = req.body;
+
+        if (!cluster) {
+          res.status(400).json({
+            success: false,
+            error: "Cluster data required",
+            timestamp: new Date().toISOString(),
+          });
+          return;
+        }
+
+        const result = {
+          id: `synthesis_${Date.now()}`,
+          summary: `Analyzed ${cluster.events?.length || 0} events`,
+          recommendation: "Monitor situation and follow local guidance",
+          severity: cluster.severity || "MEDIUM",
+          confidence: 85,
+          timestamp: new Date().toISOString(),
+        };
+
+        res.status(200).json({
+          success: true,
+          data: result,
+          timestamp: new Date().toISOString(),
+        });
+      } catch (error) {
+        console.error("Synthesis error:", error);
+        res.status(500).json({
+          success: false,
+          error: "AI synthesis failed",
+          timestamp: new Date().toISOString(),
+        });
+      }
+    },
+  );
+
+  // Process events endpoint
+  app.post(
+    "/intelligence/process",
+    async (req: express.Request, res: express.Response): Promise<void> => {
+      try {
+        const { events } = req.body;
+
+        if (!events || !Array.isArray(events)) {
+          res.status(400).json({
+            success: false,
+            error: "Events array is required",
+            timestamp: new Date().toISOString(),
+          });
+          return;
+        }
+
+        const result = {
+          id: `process_${Date.now()}`,
+          processedEvents: events.length,
+          clusters: [],
+          synthesis: null,
+          timestamp: new Date().toISOString(),
+        };
+
+        res.status(200).json({
+          success: true,
+          data: result,
+          timestamp: new Date().toISOString(),
+        });
+      } catch (error) {
+        console.error("Processing error:", error);
+        res.status(500).json({
+          success: false,
+          error: "Intelligence processing failed",
+          timestamp: new Date().toISOString(),
+        });
+      }
+    },
+  );
+
+  // Media analysis endpoint
+  app.post(
+    "/intelligence/media",
+    (req: express.Request, res: express.Response): void => {
+      try {
+        const { mediaUrl, reportId } = req.body || {};
+
+        if (!mediaUrl || !reportId) {
+          res.status(400).json({
+            success: false,
+            error: "mediaUrl and reportId required",
+            timestamp: new Date().toISOString(),
+          });
+          return;
+        }
+
+        const result = {
+          id: `media_${Date.now()}`,
+          reportId,
+          mediaUrl,
+          analysis: {
+            detected: ["traffic", "vehicles"],
+            confidence: 0.9,
+          },
+          timestamp: new Date().toISOString(),
+        };
+
+        res.status(200).json({
+          success: true,
+          data: result,
+          timestamp: new Date().toISOString(),
+        });
+      } catch (error) {
+        console.error("Media error:", error);
+        res.status(500).json({
+          success: false,
+          error: "Media analysis failed",
+          timestamp: new Date().toISOString(),
+        });
+      }
+    },
+  );
+
+  // Reports endpoint
   app.get("/reports", (req: express.Request, res: express.Response) => {
     try {
       const reports = [
@@ -137,42 +277,66 @@ const createApp = () => {
           severity: "MEDIUM",
           timestamp: new Date().toISOString(),
         },
+        {
+          id: "report_2",
+          title: "Road Closure Alert",
+          category: "infrastructure",
+          severity: "HIGH",
+          timestamp: new Date().toISOString(),
+        },
       ];
 
       return res.status(200).json({
         success: true,
         data: reports,
         count: reports.length,
+        timestamp: new Date().toISOString(),
       });
     } catch (error) {
       console.error("Reports error:", error);
       return res.status(500).json({
         success: false,
         error: "Failed to fetch reports",
+        timestamp: new Date().toISOString(),
       });
     }
   });
 
   // 404 handler
-  app.use((req: express.Request, res: express.Response) => {
-    return res.status(404).json({
+  app.use("*", (req: express.Request, res: express.Response): void => {
+    res.status(404).json({
       success: false,
-      error: "Not Found",
-      path: req.path,
+      error: "Endpoint not found",
+      path: req.originalUrl,
       method: req.method,
-      available: ["/", "/health", "/test", "/synthesis", "/media", "/reports"],
+      availableEndpoints: [
+        "GET /",
+        "GET /health",
+        "GET /intelligence/health",
+        "GET /intelligence/status",
+        "POST /intelligence/cluster",
+        "POST /intelligence/synthesize",
+        "POST /intelligence/process",
+        "POST /intelligence/media",
+        "GET /reports",
+      ],
+      timestamp: new Date().toISOString(),
     });
   });
 
   return app;
 };
 
-// FIXED: Simplified Firebase Functions v2 CORS configuration
+// Create app once at module level for better performance
+const app = createApp();
+
+// Export Firebase Function
 export const api = onRequest(
   {
-    cors: true, // ✅ Simple: allow all origins
+    cors: true,
     memory: "1GiB",
     timeoutSeconds: 60,
+    maxInstances: 10,
   },
-  createApp(),
+  app,
 );

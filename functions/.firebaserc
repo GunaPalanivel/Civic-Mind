@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "civic-mind-prod"
-  }
+    "default": "civic-mind-prod",
+    "civicmind": "civicmind-e1041"
+  },
+  "targets": {},
+  "etags": {}
 }

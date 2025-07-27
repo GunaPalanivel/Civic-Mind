@@ -1,12 +1,42 @@
-﻿import fastify, { FastifyInstance } from 'fastify';
-import { setupMiddleware } from '@/middleware';
-import { setupRoutes } from '@/routes';
+﻿// src/index.ts - Express.js version (your current approach)
+import express from "express";
+import cors from "cors";
+import { onRequest } from "firebase-functions/v2/https";
 
-export async function buildApp(opts = {}): Promise<FastifyInstance> {
-  const app = fastify(opts);
-  
-  await setupMiddleware(app);
-  await setupRoutes(app);
-  
+const createApp = (): express.Application => {
+  const app = express();
+
+  app.use(cors({ origin: true }));
+  app.use(express.json());
+
+  // Your existing routes
+  app.get("/health", (req, res) => {
+    res.json({
+      success: true,
+      message: "Civic Mind API is operational",
+      timestamp: new Date().toISOString(),
+      environment: "firebase-functions",
+    });
+  });
+
+  // ✅ FIXED: Named wildcard parameter
+  app.use("/:catchall*", (req, res) => {
+    res.status(404).json({
+      success: false,
+      error: "Endpoint not found",
+      path: req.originalUrl,
+      timestamp: new Date().toISOString(),
+    });
+  });
+
   return app;
-}
+};
+
+export const api = onRequest(
+  {
+    cors: true,
+    memory: "1GiB",
+    timeoutSeconds: 300,
+  },
+  createApp(),
+);
