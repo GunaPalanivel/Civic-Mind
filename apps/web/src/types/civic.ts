@@ -1,19 +1,28 @@
-// src/types/civic.ts - Complete Type Definitions
+export interface Location {
+  // Use Google Maps standard naming
+  lat: number; // Changed from latitude
+  lng: number; // Changed from longitude
+  address?: string;
+  region?: string;
+}
+
 export interface CivicEvent {
   id: string;
   title: string;
   description: string;
-  category: string;
+  category:
+    | "traffic"
+    | "infrastructure"
+    | "safety"
+    | "environment"
+    | "utilities"
+    | "other";
   severity: "LOW" | "MEDIUM" | "HIGH" | "CRITICAL";
-  location: {
-    lat: number;
-    lng: number;
-    address?: string;
-  };
+  location: Location;
   timestamp: string;
-  source?: string;
-  mediaUrl?: string;
-  verified?: boolean;
+  reporterId: string;
+  mediaUrls?: string[];
+  tags?: string[];
 }
 
 export interface EventCluster {

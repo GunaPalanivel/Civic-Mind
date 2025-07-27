@@ -65,8 +65,8 @@ export function CivicMap({
       alerts.map((alert) => ({
         ...alert,
         position: {
-          lat: alert.location.latitude,
-          lng: alert.location.longitude,
+          lat: alert.location.lat,
+          lng: alert.location.lng,
         },
       })),
     [alerts],
@@ -77,8 +77,8 @@ export function CivicMap({
       clusters.map((cluster) => ({
         ...cluster,
         position: {
-          lat: cluster.location.latitude,
-          lng: cluster.location.longitude,
+          lat: cluster.location.lat,
+          lng: cluster.location.lng,
         },
       })),
     [clusters],
@@ -251,8 +251,8 @@ export function CivicMap({
           {selectedAlert && (
             <InfoWindow
               position={{
-                lat: selectedAlert.location.latitude,
-                lng: selectedAlert.location.longitude,
+                lat: selectedAlert.location.lat,
+                lng: selectedAlert.location.lng,
               }}
               onCloseClick={() => setSelectedAlert(null)}
             >
@@ -292,8 +292,8 @@ export function CivicMap({
           {selectedCluster && (
             <InfoWindow
               position={{
-                lat: selectedCluster.location.latitude,
-                lng: selectedCluster.location.longitude,
+                lat: selectedCluster.location.lat,
+                lng: selectedCluster.location.lng,
               }}
               onCloseClick={() => setSelectedCluster(null)}
             >
