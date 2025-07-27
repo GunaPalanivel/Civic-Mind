@@ -8,24 +8,12 @@ Civic Pulse GCP is an enterprise-scale, real-time civic intelligence platform bu
 
 ## Visual Overview
 
-## 🧩 System Design
-
-### 🔁 Process Flow
-
-Visualize user journeys and system workflows:  
-[Figma – Process Flow Diagram](https://www.figma.com/board/xBYDECnHwGugcpqDFjvC9w/Civic-Mind---Process-flow-diagram?node-id=0-1&t=tHN9GvofUW7wbhGk-1)
-
-### 🏗️ Architecture
-
-Component-level overview of backend services, databases, and integrations:  
-[Figma – Architecture Diagram](https://www.figma.com/board/0FzKYEXyFyYiFC0q7yj6UI/Civic-Mind---Architecture-diagram?node-id=0-1&t=z3iGY5xkoXGJwuv8-1)
-
-### 🎨 Wireframes
-
-UI/UX design wireframes across major flows and roles:  
-[Figma – Wireframes](https://www.figma.com/board/JiGJ9L7rZeMSLdECoOiXhC/Civic-Mind---Wireframes-diagram?node-id=0-1&t=z3iGY5xkoXGJwuv8-1)
-
----
+| Section          | Description                                                               | Link                                                                                                                                                  |
+| ---------------- | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 🔁 Process Flow  | Visualize user journeys and system workflows                              | [Figma – Process Flow Diagram](https://www.figma.com/board/xBYDECnHwGugcpqDFjvC9w/Civic-Mind---Process-flow-diagram?node-id=0-1&t=tHN9GvofUW7wbhGk-1) |
+| 🏗️ Architecture  | Component-level overview of backend services, databases, and integrations | [Figma – Architecture Diagram](https://www.figma.com/board/0FzKYEXyFyYiFC0q7yj6UI/Civic-Mind---Architecture-diagram?node-id=0-1&t=z3iGY5xkoXGJwuv8-1) |
+| 🎨 Wireframes    | UI/UX design wireframes across major flows and user roles                 | [Figma – Wireframes](https://www.figma.com/board/JiGJ9L7rZeMSLdECoOiXhC/Civic-Mind---Wireframes-diagram?node-id=0-1&t=z3iGY5xkoXGJwuv8-1)             |
+| 📄 Project Pitch | Full PDF deck summarizing the project, goals, and tech stack              | [Google Drive – Pitch PDF](https://drive.google.com/file/d/1GkEze3RhW4It5Rn3P8FElG8JzlsEy--_/view?usp=sharing)                                        |
 
 ### **Key Achievements**
 
