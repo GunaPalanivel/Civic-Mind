@@ -1,8 +1,8 @@
-# 🌟 Civic Mind Intelligence Platform
+# 🌟 Civic Mind
 
-> **Gemini at the Grid — Real-time AI cognition for live urban systems.**
+> **Built at [Google Cloud Agentic AI Day 2025](https://vision.hack2skill.com/event/googlecloudagenticaiday2025?utm_source=hack2skill&utm_medium=homepage)** - Gemini at the Grid — Real-time AI cognition for live urban systems. AI integration with Vertex AI and Gemini Pro.
 
-**Live Production System:** [https://asia-south1-civicmind-e1041.cloudfunctions.net/api](https://asia-south1-civicmind-e1041.cloudfunctions.net/api)
+![Google Cloud Agentic AI Day](./assets/Google_Cloud_Agentic_AI_Day_Video.mp4)
 
 ## 📚 Table of Contents
 
@@ -146,7 +146,7 @@ Municipal governments face critical challenges in civic incident management:
 
 ## Project Timeline
 
-### **Initial Stage (Weeks 1-2)**
+### **Initial Stage**
 
 **Foundation & Architecture**
 
@@ -170,7 +170,7 @@ interface CivicEvent {
 - ✅ Firebase project setup and configuration
 - ✅ Development environment and tooling setup
 
-### **Current Stage (Weeks 3-6)**
+### **Current Stage**
 
 **Production Deployment & Core Features**
 
@@ -207,7 +207,7 @@ POST /synthesis                 # AI synthesis (mock, ready for Vertex AI)
 POST /media                     # Media analysis pipeline
 ```
 
-### **Future Stage (Weeks 7-8)**
+### **Future Stage**
 
 **Advanced Features & Production Scaling**
 
@@ -376,11 +376,11 @@ vercel --prod
 
 ```bash
 # Test API endpoints
-curl https://asia-south1-your-project.cloudfunctions.net/api/health
-curl https://asia-south1-your-project.cloudfunctions.net/api/reports
+curl https://asia-south1-civicmind-e1041.cloudfunctions.net/api/health
+curl https://asia-south1-civicmind-e1041.cloudfunctions.net/api/reports
 
 # Test AI synthesis
-curl -X POST https://asia-south1-your-project.cloudfunctions.net/api/synthesis \
+curl -X POST https://asia-south1-civicmind-e1041.cloudfunctions.net/api/synthesis \
   -H "Content-Type: application/json" \
   -d '{"cluster": {"events": [{"title": "Test", "severity": "HIGH"}]}}'
 ```
@@ -426,13 +426,13 @@ interface ContributionRequirements {
 
 **Civic Mind represents production-grade software engineering** showcasing:
 
-🏆 **Full-Stack Mastery**: Complete TypeScript implementation from Firebase Functions to React frontend, demonstrating modern web development expertise
+**Full-Stack Mastery**: Complete TypeScript implementation from Firebase Functions to React frontend, demonstrating modern web development expertise
 
-🏆 **Google Cloud Integration**: Live deployment on Firebase with Express.js, showcasing serverless architecture and cloud platform mastery
+**Google Cloud Integration**: Live deployment on Firebase with Express.js, showcasing serverless architecture and cloud platform mastery
 
-🏆 **Real-World Problem Solving**: Municipal-scale civic intelligence addressing actual government technology needs with measurable implementation
+**Real-World Problem Solving**: Municipal-scale civic intelligence addressing actual government technology needs with measurable implementation
 
-🏆 **Production Architecture**: Enterprise-grade error handling, CORS configuration, and deployment pipeline from development to live production
+**Production Architecture**: Enterprise-grade error handling, CORS configuration, and deployment pipeline from development to live production
 
 ### **Technical Achievement Summary**
 
