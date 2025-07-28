@@ -4,7 +4,7 @@
 
 <div align="center">
 
-[![Platform Demo](https://img.shields.io/badge/_Google_Cloud-The_Agentic_AI_Day-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white)](https://drive.google.com/file/d/1AX219x5NT2QbOhQyK6IRRh87VLxEn2cn/view?usp=drive_link)
+[![Platform Demo](https://img.shields.io/badge/_Google_Cloud-The_Agentic_AI_Day-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white)](https://www.linkedin.com/posts/hack2skill_agenticaiday-googlecloud-hack2skill-activity-7354779004932907008-TCio?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD1iPIIBQeYlEGyQlhSmzyVizNLkjpHgngw)
 
 **Google Cloud Agentic AI Day 2025**
 
