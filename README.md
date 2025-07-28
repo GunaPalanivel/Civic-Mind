@@ -2,7 +2,13 @@
 
 > **Built at [Google Cloud Agentic AI Day 2025](https://vision.hack2skill.com/event/googlecloudagenticaiday2025?utm_source=hack2skill&utm_medium=homepage)** - Gemini at the Grid — Real-time AI cognition for live urban systems. AI integration with Vertex AI and Gemini Pro.
 
-![Google Cloud Agentic AI Day](https://github.com/rohithvarma73/Civic-Mind/raw/80d15ce1272339cb862e5cf7aa8cc848f493c0fd/assets/Google_Cloud_Agentic_AI_Day_Video.mp4)
+<div align="center">
+
+[![Platform Demo](https://img.shields.io/badge/_Google_Cloud-The_Agentic_AI_Day-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white)](https://drive.google.com/file/d/1AX219x5NT2QbOhQyK6IRRh87VLxEn2cn/view?usp=drive_link)
+
+**Google Cloud Agentic AI Day 2025**
+
+</div>
 
 ## 📚 Table of Contents
 
