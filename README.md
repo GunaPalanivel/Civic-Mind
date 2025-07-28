@@ -1,4 +1,4 @@
-# 🌟 Civic Mind
+# Civic Mind
 
 > **Built at [Google Cloud Agentic AI Day 2025](https://vision.hack2skill.com/event/googlecloudagenticaiday2025?utm_source=hack2skill&utm_medium=homepage)** - Gemini at the Grid — Real-time AI cognition for live urban systems. AI integration with Vertex AI and Gemini Pro.
 
