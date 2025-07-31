@@ -10,6 +10,8 @@
 
 </div>
 
+> **From 𝟱𝟳,𝟬𝟬𝟬+ 𝗱𝗲𝘃𝗲𝗹𝗼𝗽𝗲𝗿𝘀 and 𝟵,𝟭𝟬𝟬+ 𝗶𝗱𝗲𝗮𝘀 to the 𝗳𝗶𝗻𝗮𝗹 𝟳𝟬𝟬 — 𝗮𝗻𝗱 𝗮𝗺𝗼𝗻𝗴 [𝘁𝗵𝗲 𝘁𝗼𝗽 𝟱𝟬 𝘀𝘁𝘂𝗱𝗲𝗻𝘁 𝘁𝗲𝗮𝗺𝘀.](https://www.linkedin.com/posts/guna-palanivel_googlecloud-worldrecord-hack2skill-activity-7355641510693924864-PoRK?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD1iPIIBQeYlEGyQlhSmzyVizNLkjpHgngw) 𝗪𝗲’𝗿𝗲 𝗶𝗻!**
+
 ## 📚 Table of Contents
 
 - [Visual Overview](#visual-overview)
